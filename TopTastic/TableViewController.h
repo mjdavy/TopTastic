@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  TableViewController.h
 //  TopTastic
 //
 //  Created by Davy, Martin on 4/10/15.
@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
-
+@interface TableViewController : UITableViewController
 
 @end
-
