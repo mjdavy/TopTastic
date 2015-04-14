@@ -8,11 +8,12 @@
 
 #import "TableViewController.h"
 #import "GTLYouTube.h"
+#import "MusicVideo.h"
 
 @interface TableViewController ()
 
 @property (strong, nonatomic) GTLServiceYouTube *youTubeService;
-@property (strong, nonatomic) NSArray *playListItems;
+@property (strong, nonatomic) NSArray *musicVideos;
 
 @end
 
@@ -29,16 +30,16 @@
     return _youTubeService;
 }
 
-@synthesize playListItems = _playListItems;
+@synthesize musicVideos = _musicVideos;
 
-- (NSArray*) playListItems
+- (NSArray*) musicVideos
 {
-    return _playListItems;
+    return _musicVideos;
 }
 
-- (void) setPlayListItems:(NSArray*)items
+- (void) setMusicVideos:(NSArray *)musicVideos
 {
-    _playListItems = items;
+    _musicVideos = musicVideos;
     [self.tableView reloadData];
 }
 
@@ -48,20 +49,46 @@
     query.playlistId = @"PLtZ7tJkCfjGz8PRCfv3NcekipiDXolbLF";
     query.maxResults = 40;
     
-    __block NSArray *result = nil;
     
-    GTLServiceTicket *ticket = [ self.youTubeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
-                                {
-                                    
-                                    if (error == nil)
-                                    {
-                                        GTLYouTubePlaylistItemListResponse *response = object;
-                                        result = response.items;
-                                        
-                                        self.playListItems = result;
-                                        
-                                    }
-                                }];
+    [self.youTubeService executeQuery:query completionHandler:^(GTLServiceTicket *ticket, id object, NSError *error)
+     {
+         
+         if (error == nil)
+         {
+             GTLYouTubePlaylistItemListResponse *response = object;
+             __block NSMutableArray *result = [[NSMutableArray alloc] init];
+             
+             for (GTLYouTubePlaylistItem *item in response.items)
+             {
+                 GTLYouTubeThumbnailDetails *thumbnails = item.snippet.thumbnails;
+                 GTLYouTubeThumbnail *thumbnail = thumbnails.standard;
+                 
+                 NSArray *at = [item.snippet.title componentsSeparatedByString:@"-"];
+                 NSString *artist = item.snippet.title;
+                 NSString *title = item.snippet.title;
+                 
+                 if (at.count == 2)
+                 {
+                     artist = [at[0] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                     title = [at[1] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+                 }
+                 
+                 MusicVideo* video = [[MusicVideo alloc] init];
+                 video.artist = artist;
+                 video.title = title;
+                 video.thumbnailUrl = thumbnail.url;
+                 
+                 
+                 GTLYouTubeResourceId *resourceId = item.snippet.resourceId;
+                 video.videoId = [resourceId.JSON objectForKey:@"videoId"];
+                 
+                 [result addObject:video];
+                 
+             }
+             
+             self.musicVideos = result;
+         }
+     }];
 }
 
 
@@ -94,7 +121,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)sectio
 {
     // Return the number of rows in the section.
-    return self.playListItems.count;
+    return self.musicVideos.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -107,9 +134,11 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:myReuseId];
     }
     
-    GTLYouTubePlaylistItem *item = self.playListItems[indexPath.row];
+    MusicVideo *video = self.musicVideos[indexPath.row];
     
-    cell.textLabel.text = item.snippet.title;
+    cell.textLabel.text = video.artist;
+    cell.detailTextLabel.text = video.title;
+    cell.imageView.image = [UIImage imageWithData:[NSData dataWithContentsOfURL:[NSURL URLWithString:video.thumbnailUrl]]];
     
     
     return cell;

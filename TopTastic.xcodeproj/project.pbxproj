@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9B6380601ADD7C650034D1D2 /* MusicVideo.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B63805F1ADD7C650034D1D2 /* MusicVideo.m */; };
 		9B6A7B111AD837D40048E29D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A7B101AD837D40048E29D /* main.m */; };
 		9B6A7B141AD837D40048E29D /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9B6A7B131AD837D40048E29D /* AppDelegate.m */; };
 		9B6A7B1A1AD837D40048E29D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9B6A7B181AD837D40048E29D /* Main.storyboard */; };
@@ -33,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		9B3885181ADC304700F77EA6 /* GTLYouTubePlaylistItemListResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GTLYouTubePlaylistItemListResponse.h; path = "../../../../google-api-objectivec-client-read-only/Source/Services/YouTube/Generated/GTLYouTubePlaylistItemListResponse.h"; sourceTree = "<group>"; };
+		9B63805E1ADD7C650034D1D2 /* MusicVideo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MusicVideo.h; sourceTree = "<group>"; };
+		9B63805F1ADD7C650034D1D2 /* MusicVideo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MusicVideo.m; sourceTree = "<group>"; };
 		9B6A7B0B1AD837D40048E29D /* TopTastic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TopTastic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9B6A7B0F1AD837D40048E29D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9B6A7B101AD837D40048E29D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -135,6 +138,8 @@
 				9B6A7B1D1AD837D40048E29D /* LaunchScreen.xib */,
 				9B8C24D61AD86C46009ED08C /* TableViewController.h */,
 				9B8C24D71AD86C46009ED08C /* TableViewController.m */,
+				9B63805E1ADD7C650034D1D2 /* MusicVideo.h */,
+				9B63805F1ADD7C650034D1D2 /* MusicVideo.m */,
 				9B8C24DA1AD86FF9009ED08C /* YouTubeHelper.h */,
 				9B8C24DB1AD86FF9009ED08C /* YouTubeHelper.m */,
 				9B6A7B0E1AD837D40048E29D /* Supporting Files */,
@@ -325,6 +330,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9B6A7B141AD837D40048E29D /* AppDelegate.m in Sources */,
+				9B6380601ADD7C650034D1D2 /* MusicVideo.m in Sources */,
 				9B8C24DC1AD86FF9009ED08C /* YouTubeHelper.m in Sources */,
 				9B6A7CE41AD83E950048E29D /* GTLYouTube_Sources.m in Sources */,
 				9B8C24D81AD86C46009ED08C /* TableViewController.m in Sources */,
